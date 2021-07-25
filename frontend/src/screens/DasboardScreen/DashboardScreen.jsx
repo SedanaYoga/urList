@@ -47,7 +47,7 @@ const DashboardScreen = () => {
             </Link>
           </MenuSideStyled>
           <FilterDropdownStyled>
-            {/* <DropdownComponent /> */}
+            <DropdownComponent />
           </FilterDropdownStyled>
         </div>
         <ButtonComponent>

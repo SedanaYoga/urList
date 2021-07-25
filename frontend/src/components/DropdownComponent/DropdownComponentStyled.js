@@ -16,12 +16,12 @@ export const DropdownComponentStyled = styled.div`
   width: 250px;
   min-height: 50px;
   border-radius: 17px;
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .nav-item {
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-
   a {
     color: var(--text-color);
     text-decoration: none;
@@ -33,13 +33,6 @@ export const DropdownComponentStyled = styled.div`
     font-size: 22px;
     font-weight: 600;
     margin-left: 0.3em;
-  }
-
-  .nav-item {
-    width: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   /* Icon Button */
@@ -66,13 +59,18 @@ export const DropdownComponentStyled = styled.div`
     position: absolute;
     top: 335px;
     width: 250px;
-    height: auto;
+    height: 0;
     transform: translateX(15.5%);
     background-color: ${(props) => props.theme.color1};
     border-radius: 0 0 17px 17px;
-    padding: 1rem;
+    /* padding: 1rem; */
+    padding: 0rem;
     overflow: hidden;
-    transition: height 500ms ease;
+    transition: all 1s ease;
+  }
+  .dropdown.active {
+    padding: 1rem;
+    height: auto;
   }
 `
 export const CheckboxStyled = styled.div`
