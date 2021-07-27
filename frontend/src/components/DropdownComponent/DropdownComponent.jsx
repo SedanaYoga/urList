@@ -49,6 +49,7 @@ const NavItem = ({ icon, children, hook }) => {
 
 const DropdownComponent = () => {
   const [open, setOpen] = useState(true)
+
   return (
     <DropdownComponentStyled>
       <NavItem icon={<CaretIcon />} hook={{ open, setOpen }}>

@@ -16,6 +16,8 @@ import DropdownComponent from '../../components/DropdownComponent/DropdownCompon
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent.jsx'
 import { ReactComponent as AddSVG } from '../../images/add-icon.svg'
 import HeaderComponent from '../../components/HeaderComponent/HeaderComponent'
+import ListContainerComponent from '../../components/ListContainerComponent/ListContainerComponent'
+import NoteContainerComponent from '../../components/NoteContainerComponent/NoteContainerComponent'
 const DashboardScreen = () => {
   return (
     <ContainerStyled>
@@ -55,12 +57,12 @@ const DashboardScreen = () => {
         </ButtonComponent>
       </LeftSideBarStyled>
       <MiddleSideBarStyled>
-        <HeaderComponent type="Daily Notes" />
-        <div className="dailylist-content"></div>
+        <HeaderComponent type="Daily List" />
+        <ListContainerComponent></ListContainerComponent>
       </MiddleSideBarStyled>
       <RightSideBarStyled>
-        <HeaderComponent />
-        <div className="dailynotes-content"></div>
+        <HeaderComponent type="Daily Notes" />
+        <NoteContainerComponent></NoteContainerComponent>
       </RightSideBarStyled>
     </ContainerStyled>
   )

@@ -18,6 +18,9 @@ const SearchDailyList = () => {
   }
   const clearSearchHandler = () => {
     setSearch({ ...search, searchText: '' })
+    if (search.searchText === '' && search.open === true) {
+      setSearch({ ...search, open: false })
+    }
   }
 
   return (
@@ -82,7 +85,7 @@ const HeaderComponent = ({ type }) => {
   return (
     <HeaderStyled>
       <div className="title-dailylist">
-        {type === 'Daily Notes' ? (
+        {type === 'Daily List' ? (
           <span>
             <CheckSVG /> Daily List
           </span>
@@ -90,7 +93,7 @@ const HeaderComponent = ({ type }) => {
           <span>📃 Daily Notes</span>
         )}
       </div>
-      {type === 'Daily Notes' && <RoundGroupComponent />}
+      {type === 'Daily List' && <RoundGroupComponent />}
     </HeaderStyled>
   )
 }

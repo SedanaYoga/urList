@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 // Using Routes for ListAPI
 app.use('/api/lists', listRoutes)
 
-const PORT = 5000
+const PORT = 5005
 
 app.listen(
   PORT,
