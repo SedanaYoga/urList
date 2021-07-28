@@ -19,6 +19,10 @@ const ListBoxComponent = () => {
             </div>
             <p>March 07</p>
           </div>
+          <div className="list-url click-fx noselect">
+            <p className="url-icon">📍</p>
+            <p>copyURL</p>
+          </div>
         </div>
 
         {/* LIST BODY */}
@@ -26,21 +30,21 @@ const ListBoxComponent = () => {
           <div className="list-title flex-center">
             <p>[Sys] DGIT Hosted AWS Telflow System SSH</p>
           </div>
-          <div className="list-source">
-            <p>www.google.com</p>
+          <div className="list-username">
+            <p>syoga</p>
           </div>
           <input
             type="text"
             value="docker exec -it consul_10_237_3_168 consul kv get -recurse
               telflow/app/tmf-622-"
             readOnly
-            className="list-detail flex-center"
+            className="list-detail flex-center bw-selection"
           ></input>
           <div className="modif-list flex-center">
-            <div className="edit-list rounded-btn flex-center">
+            <div className="edit-list rounded-btn flex-center click-fx">
               <EditSVG />
             </div>
-            <div className="delete-list rounded-btn flex-center">
+            <div className="delete-list rounded-btn flex-center click-fx">
               <DeleteSVG />
             </div>
           </div>

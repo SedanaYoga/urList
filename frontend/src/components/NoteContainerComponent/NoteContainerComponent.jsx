@@ -1,10 +1,11 @@
 import React from 'react'
+import SearchComponent from '../SearchComponent/SearchComponent'
 import { NoteContainerStyled } from './NoteContainerComponentStyled'
 
 const NoteContainerComponent = () => {
   return (
     <NoteContainerStyled>
-      <div></div>
+      <SearchComponent type="Daily Notes" />
     </NoteContainerStyled>
   )
 }

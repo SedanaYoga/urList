@@ -7,7 +7,7 @@ const ListContainerComponent = () => {
     <ListContainerStyled>
       {columns.map((column, index) => (
         <div key={index} className="list-type division">
-          <div className="list-type title-box">
+          <div className="list-type title-box noselect">
             <p className="list-type-name">{column}</p>
             <div className="list-amount">
               <p>1</p>

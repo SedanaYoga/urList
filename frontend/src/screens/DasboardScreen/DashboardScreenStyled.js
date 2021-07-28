@@ -27,6 +27,7 @@ export const LeftSideBarStyled = styled(FlexCenter)`
   /* background: blue; */
 `
 export const MiddleSideBarStyled = styled(FlexCenter)`
+  position: relative;
   flex-direction: column;
   justify-content: start;
   min-width: 1225px;

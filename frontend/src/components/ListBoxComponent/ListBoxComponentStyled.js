@@ -11,10 +11,32 @@ export const ListBoxStyled = styled.div`
     padding: 1em 1.3em;
   }
   .list-header {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+  .list-url {
+    position: absolute;
+    right: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    min-width: 63px;
+    border: 1px solid ${(props) => props.theme.color4};
+    border-radius: 6px;
+    padding: 1px 6px;
+    cursor: pointer;
+    background: white;
+    p {
+      color: #4d7e26;
+      font-weight: 700;
+      font-size: 11px;
+    }
+  }
+  .url-icon {
+    margin-right: 2px;
   }
   .symbol-list {
     width: 30px;
@@ -78,7 +100,7 @@ export const ListBoxStyled = styled.div`
     font-weight: 600;
     font-family: 'Nunito';
   }
-  .list-source {
+  .list-username {
     position: absolute;
     top: 50px;
     font-weight: 600;

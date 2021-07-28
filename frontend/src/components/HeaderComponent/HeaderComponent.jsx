@@ -1,46 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   HeaderStyled,
   RoundGroupStyled,
-  SearchDailyListStyled,
   NotifDailyListStyled,
 } from './HeaderComponentStyled'
 import { ReactComponent as CheckSVG } from '../../images/check-icon.svg'
 import { ReactComponent as NotifSVG } from '../../images/notif-icon.svg'
-
-const SearchDailyList = () => {
-  const [search, setSearch] = useState({ open: false, searchText: '' })
-  const searchHandler = () => {
-    setSearch({ ...search, open: !search.open })
-  }
-  const searchTextHandler = (e) => {
-    setSearch({ ...search, searchText: e.target.value })
-  }
-  const clearSearchHandler = () => {
-    setSearch({ ...search, searchText: '' })
-    if (search.searchText === '' && search.open === true) {
-      setSearch({ ...search, open: false })
-    }
-  }
-
-  return (
-    <SearchDailyListStyled>
-      <div className={`search ${search.open ? 'active' : ''}`}>
-        <div className="icon" onClick={searchHandler}></div>
-        <div className="input">
-          <input
-            type="text"
-            value={search.searchText}
-            onChange={searchTextHandler}
-            placeholder="Search..."
-            id="mysearch"
-          />
-        </div>
-        <span className="clear" onClick={clearSearchHandler}></span>
-      </div>
-    </SearchDailyListStyled>
-  )
-}
+import SearchComponent from '../SearchComponent/SearchComponent'
 
 const NotifDailyList = () => {
   return (
@@ -67,13 +33,13 @@ const RoundGroupComponent = () => {
     <>
       {/* Search Section is separated from Notification and Profile */}
       <div className="search-dailylist">
-        <SearchDailyList />
+        <SearchComponent type="Daily List" />
       </div>
       <RoundGroupStyled>
-        <div className="wh-60 notif-dailylist">
+        <div className="wh-60 notif-dailylist click-fx">
           <NotifDailyList />
         </div>
-        <div className="wh-70 profile-dailylist">
+        <div className="wh-70 profile-dailylist click-fx noselect">
           <ProfileDailyList />
         </div>
       </RoundGroupStyled>
@@ -84,7 +50,7 @@ const RoundGroupComponent = () => {
 const HeaderComponent = ({ type }) => {
   return (
     <HeaderStyled>
-      <div className="title-dailylist">
+      <div className="title-dailylist noselect">
         {type === 'Daily List' ? (
           <span>
             <CheckSVG /> Daily List
