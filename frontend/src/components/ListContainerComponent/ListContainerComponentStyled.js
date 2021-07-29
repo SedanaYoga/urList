@@ -6,6 +6,7 @@ export const ListContainerStyled = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
+  /* background: red; */
   .list-type {
     width: 100%;
     text-align: center;

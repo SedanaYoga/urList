@@ -13,7 +13,7 @@ export const SearchStyled = styled.div`
     overflow: hidden;
   }
   .search.active {
-    width: ${(props) => (props.type === type[0] ? '600px' : '345px')};
+    width: ${(props) => (props.type === type[0] ? '600px' : '365px')};
     height: ${(props) => props.type === type[1] && '36px'};
   }
   .search .icon {

@@ -22,7 +22,7 @@ const DashboardScreen = () => {
   return (
     <ContainerStyled>
       <LeftSideBarStyled>
-        <div>
+        <div className="noselect">
           <LogoStyled>
             <img
               src="https://lh3.googleusercontent.com/wY5xafshzpNPsOZccfl7NdTceXtk-L3bjiBEX0PxvLzjeSHF2Tm1y3UdZSFYyNwDIz_hZjYNCjx_sE0qvEd1Co6y6u59Fw2BAXzr-upPJkwwET3A5NlWPVH2i1bdpmTueseox8x-iQ=w2400"
@@ -34,6 +34,7 @@ const DashboardScreen = () => {
               <p>urList App</p>
             </div>
           </LogoStyled>
+
           <MenuSideStyled>
             <Link to="/" className="menu-side">
               <DashboardSVG fill="black" width="22" />

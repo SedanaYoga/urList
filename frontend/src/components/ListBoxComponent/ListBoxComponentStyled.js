@@ -66,12 +66,6 @@ export const ListBoxStyled = styled.div`
     }
   }
 
-  .flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
   .list-body {
     margin-top: 9px;
     position: relative;

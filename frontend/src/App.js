@@ -70,6 +70,12 @@ body {
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
