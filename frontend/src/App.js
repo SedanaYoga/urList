@@ -35,7 +35,6 @@ const GlobalStyled = createGlobalStyle`
 }
 
 body {
-  background-image: url('./images/final design transparent.png');
   font-family: Nunito, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;

@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const NoteContainerStyled = styled.div`
   /* background: black; */
+  position: relative;
   height: 760px;
   .header-note {
     /* background: cyan; */
@@ -20,13 +21,13 @@ export const NoteContainerStyled = styled.div`
     height: 640px;
     margin-bottom: 10px;
   }
-  .input-note {
-    min-height: 45px;
-  }
-  .input-note textarea {
-    position: relative;
+  textarea {
+    position: absolute;
+    bottom: 0;
     width: 100%;
-    height: 50px;
+    max-height: 150px;
+    height: ${(props) => props.textH}px;
+    /* transform: translateY(10px); */
     padding: 1em 1.5em;
     border-radius: 18px;
     border: none;

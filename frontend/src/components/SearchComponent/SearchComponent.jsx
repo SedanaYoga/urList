@@ -41,8 +41,8 @@ const SearchComponent = ({ type }) => {
             value={search.searchText}
             onChange={searchTextHandler}
             placeholder="Search..."
-            id="mysearch"
             className="bw-selection"
+            autoComplete="off"
           />
         </div>
         <span

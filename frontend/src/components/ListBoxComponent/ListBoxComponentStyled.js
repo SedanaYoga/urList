@@ -3,8 +3,7 @@ import styled from 'styled-components'
 export const ListBoxStyled = styled.div`
   .list-box {
     width: 377px;
-    height: 192px;
-    background: red;
+    min-height: 192px;
     border-radius: 26px;
     background: ${(props) => props.theme.color1};
     filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.07));
@@ -19,7 +18,7 @@ export const ListBoxStyled = styled.div`
   }
   .list-url {
     position: absolute;
-    right: 80px;
+    right: 0px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -69,16 +68,27 @@ export const ListBoxStyled = styled.div`
   .list-body {
     margin-top: 9px;
     position: relative;
-    min-height: 100px;
+    min-height: 120px;
     /* background: red; */
     align-items: flex-start;
+    justify-content: space-between;
   }
   .list-title {
+    position: relative;
     text-align: left;
     padding-right: 1em;
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 33px;
+  }
+  .line-title::before {
+    position: absolute;
+    content: '';
+    margin-top: 0.5em;
+    left: 0;
+    width: 355px;
+    height: 0px;
+    border: 1px solid ${(props) => props.theme.color2};
   }
   .list-detail {
     width: 211px;

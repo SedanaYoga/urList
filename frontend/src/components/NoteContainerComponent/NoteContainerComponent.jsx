@@ -1,24 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SearchComponent from '../SearchComponent/SearchComponent'
 import { NoteContainerStyled } from './NoteContainerComponentStyled'
 
 const NoteContainerComponent = () => {
+  const [textH, setTextH] = useState(50)
+  const [inputText, setInputText] = useState('')
   const date = new Date()
   const [month, day, year] = [
     date.toLocaleString('default', { month: 'long' }),
     date.getDate(),
     date.getFullYear(),
   ]
+  const textHChangeHandler = (e) => {
+    setInputText(e.target.value)
+  }
+  const keyUpHandler = (e) => {
+    inputText === '' ? setTextH(50) : setTextH(e.target.scrollHeight)
+
+    console.log(textH)
+  }
   return (
-    <NoteContainerStyled>
+    <NoteContainerStyled textH={textH}>
       <div className="header-note">
         <SearchComponent type="Daily Notes" />
         <div className="date-today flex-center">{`Today: ${month} ${day}, ${year}`}</div>
       </div>
       <div className="note-content"></div>
-      <div className="input-note">
-        <textarea placeholder="Write here..."></textarea>
-      </div>
+      <textarea
+        placeholder="Write here..."
+        value={inputText}
+        onKeyUp={keyUpHandler}
+        onChange={textHChangeHandler}
+      ></textarea>
     </NoteContainerStyled>
   )
 }

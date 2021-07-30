@@ -2,6 +2,7 @@ import express from 'express'
 import { getAllList, postAList } from '../controller/listController.js'
 
 const router = express.Router()
+
 // @desc Fetch all lists
 // @route GET /
 // @access Public

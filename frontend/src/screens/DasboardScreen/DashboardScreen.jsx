@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { listAllLists } from '../../actions/listActions'
 import {
   ContainerStyled,
   LeftSideBarStyled,
@@ -18,7 +20,17 @@ import { ReactComponent as AddSVG } from '../../images/add-icon.svg'
 import HeaderComponent from '../../components/HeaderComponent/HeaderComponent'
 import ListContainerComponent from '../../components/ListContainerComponent/ListContainerComponent'
 import NoteContainerComponent from '../../components/NoteContainerComponent/NoteContainerComponent'
+import LoaderComponent from '../../components/LoaderComponent/LoaderComponent'
 const DashboardScreen = () => {
+  const dispatch = useDispatch()
+
+  const listAll = useSelector((state) => state.listAll)
+  const { loading, error } = listAll
+
+  useEffect(() => {
+    dispatch(listAllLists())
+  }, [dispatch])
+
   return (
     <ContainerStyled>
       <LeftSideBarStyled>
@@ -57,9 +69,17 @@ const DashboardScreen = () => {
           <AddSVG style={{ marginRight: '0.5em' }} /> Create List
         </ButtonComponent>
       </LeftSideBarStyled>
+
       <MiddleSideBarStyled>
-        <HeaderComponent type="Daily List" />
-        <ListContainerComponent></ListContainerComponent>
+        {error && <div>{error.message}</div>}
+        {loading ? (
+          <LoaderComponent />
+        ) : (
+          <>
+            <HeaderComponent type="Daily List" />
+            <ListContainerComponent />
+          </>
+        )}
       </MiddleSideBarStyled>
       <RightSideBarStyled>
         <HeaderComponent type="Daily Notes" />

@@ -1,10 +1,17 @@
 import React from 'react'
 import { ListBoxStyled } from './ListBoxComponentStyled'
-import { ReactComponent as TimeSVG } from '../../images/time-icon.svg'
+// import { useDispatch, useSelector } from 'react-redux'
+// import { ReactComponent as TimeSVG } from '../../images/time-icon.svg'
 import { ReactComponent as DeleteSVG } from '../../images/delete-icon.svg'
 import { ReactComponent as EditSVG } from '../../images/edit-icon.svg'
 
-const ListBoxComponent = () => {
+const ListBoxComponent = ({ theList }) => {
+  // const dispatch = useDispatch()
+
+  // const columnType = colType.toLowerCase()
+  // const listAll = useSelector((state) => state.listAll)
+  // const { _id, type, details } = listAll.lists
+  const { details } = theList
   return (
     <ListBoxStyled>
       <div className="list-box">
@@ -13,30 +20,32 @@ const ListBoxComponent = () => {
           <div className="symbol-list">
             <p>🤝</p>
           </div>
-          <div className="date-list">
+          {/* <div className="date-list">
             <div className="date-icon">
               <TimeSVG width="15" />
             </div>
             <p>March 07</p>
-          </div>
-          <div className="list-url click-fx noselect">
-            <p className="url-icon">📍</p>
-            <p>copyURL</p>
-          </div>
+          </div> */}
+          {details.url && (
+            <div className="list-url click-fx noselect">
+              <p className="url-icon">📍</p>
+              <p>copyURL</p>
+            </div>
+          )}
         </div>
 
         {/* LIST BODY */}
         <div className="list-body flex-center">
           <div className="list-title flex-center">
-            <p>[Sys] DGIT Hosted AWS Telflow System SSH</p>
+            <p>{details.name}</p>
+            <span className="line-title"></span>
           </div>
           <div className="list-username">
-            <p>syoga</p>
+            {details.userName && <p>{details.userName}</p>}
           </div>
           <input
             type="text"
-            value="docker exec -it consul_10_237_3_168 consul kv get -recurse
-              telflow/app/tmf-622-"
+            value={details.theDetail}
             readOnly
             className="list-detail flex-center bw-selection"
           ></input>
