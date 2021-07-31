@@ -1,13 +1,23 @@
 import styled from 'styled-components'
 
+const dayColor = {
+  Monday: '#ef476f',
+  Tuesday: '#ffd166',
+  Wednesday: '#06d6a0',
+  Thursday: '#118ab2',
+  Friday: '#073b4c',
+  Saturday: '#5a189a',
+  Sunday: '#000000',
+}
+
 export const ListBoxStyled = styled.div`
   .list-box {
     width: 377px;
-    min-height: 192px;
+    min-height: 100px;
     border-radius: 26px;
     background: ${(props) => props.theme.color1};
-    filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.07));
-    padding: 1em 1.3em;
+    filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.1));
+    padding: 1em 1em 1.5em;
   }
   .list-header {
     position: relative;
@@ -16,24 +26,7 @@ export const ListBoxStyled = styled.div`
     justify-content: space-between;
     align-items: center;
   }
-  .list-url {
-    position: absolute;
-    right: 0px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    min-width: 63px;
-    border: 1px solid ${(props) => props.theme.color4};
-    border-radius: 6px;
-    padding: 1px 6px;
-    cursor: pointer;
-    background: white;
-    p {
-      color: #4d7e26;
-      font-weight: 700;
-      font-size: 11px;
-    }
-  }
+
   .url-icon {
     margin-right: 2px;
   }
@@ -47,6 +40,9 @@ export const ListBoxStyled = styled.div`
       font-size: 18px;
     }
   }
+  .header-right {
+    flex-direction: row;
+  }
   .date-list {
     display: flex;
     flex-direction: row;
@@ -56,20 +52,37 @@ export const ListBoxStyled = styled.div`
     padding: 6px;
     height: 20px;
     border-radius: 6px;
-    background: #fc3637;
+    background: ${(props) => props.day && dayColor[props.day]};
     p {
       font-size: 10px;
       color: white;
       margin-left: 2px;
-      font-weight: 600;
+      font-weight: 500;
+    }
+  }
+  .list-url {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-right: 10px;
+    min-width: 63px;
+    border: 1px solid ${(props) => props.theme.color4};
+    border-radius: 6px;
+    padding: 1px 6px;
+    cursor: pointer;
+    background: white;
+    transition: all 300ms ease-out;
+    p {
+      color: #4d7e26;
+      font-weight: 700;
+      font-size: 11px;
     }
   }
 
   .list-body {
     margin-top: 9px;
     position: relative;
-    min-height: 120px;
-    /* background: red; */
+    min-height: 80px;
     align-items: flex-start;
     justify-content: space-between;
   }
@@ -79,14 +92,14 @@ export const ListBoxStyled = styled.div`
     padding-right: 1em;
     font-size: 18px;
     font-weight: 700;
-    margin-bottom: 33px;
+    margin-bottom: ${(props) => (props.uName ? `40px` : `25px`)};
   }
   .line-title::before {
     position: absolute;
     content: '';
     margin-top: 0.5em;
-    left: 0;
-    width: 355px;
+    left: -25px;
+    width: 380px;
     height: 0px;
     border: 1px solid ${(props) => props.theme.color2};
   }
@@ -96,6 +109,7 @@ export const ListBoxStyled = styled.div`
     border-radius: 8px;
     border: none;
     outline: none;
+    margin-top: ${(props) => (props.uName ? '15px' : '0px')};
     padding: 1em;
     background: ${(props) => props.theme.color3};
     overflow: scroll;
@@ -103,12 +117,14 @@ export const ListBoxStyled = styled.div`
     font-size: 16px;
     font-weight: 600;
     font-family: 'Nunito';
+    cursor: pointer;
   }
   .list-username {
     position: absolute;
-    top: 50px;
+    bottom: 45px;
     font-weight: 600;
     color: ${(props) => props.theme.color4};
+    cursor: pointer;
   }
   .modif-list {
     position: absolute;
