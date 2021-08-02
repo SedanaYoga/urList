@@ -139,17 +139,40 @@ export const ListBoxStyled = styled.div`
     height: 31px;
     border-radius: 31px;
     cursor: pointer;
-  }
-  .rounded-btn:hover {
-    filter: brightness(0.9);
-    :active {
-      filter: brightness(1);
-    }
+    transition: all 300ms ease-out;
   }
   .edit-list {
-    background: #ffdb65;
+    background: #ffffff;
+    border: 3px solid #ffdb65;
+    svg {
+      fill: #ffdb65;
+    }
+    :hover {
+      svg {
+        fill: #fff;
+      }
+      background: #ffdb65;
+      :active {
+        transition: none;
+        background: #fff;
+      }
+    }
   }
   .delete-list {
-    background: #ff4b6d;
+    background: #ffffff;
+    border: 3px solid #ff4b6d;
+    svg {
+      fill: #ff4b6d;
+    }
+    :hover {
+      svg {
+        fill: #fff;
+      }
+      background: #ff4b6d;
+      :active {
+        transition: none;
+        background: #fff;
+      }
+    }
   }
 `

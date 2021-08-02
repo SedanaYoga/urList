@@ -92,10 +92,10 @@ const ListBoxComponent = ({ theList }) => {
             ></input>
           </CopyToClipboard>
           <div className="modif-list flex-center">
-            <div className="edit-list rounded-btn flex-center click-fx">
+            <div className="edit-list rounded-btn flex-center">
               <EditSVG />
             </div>
-            <div className="delete-list rounded-btn flex-center click-fx">
+            <div className="delete-list rounded-btn flex-center">
               <DeleteSVG />
             </div>
           </div>

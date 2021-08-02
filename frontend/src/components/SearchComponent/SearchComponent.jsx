@@ -1,18 +1,23 @@
 import React, { useState } from 'react'
 import { SearchStyled } from './SearchComponentStyled'
+import { useDispatch, useSelector } from 'react-redux'
+import { LIST_GET_ALL_SEARCH } from '../../constants/listConstant'
 
 const SearchComponent = ({ type }) => {
-  const [search, setSearch] = useState({ open: false, searchText: '' })
-  const searchHandler = () => {
-    setSearch({ ...search, open: !search.open })
+  const dispatch = useDispatch()
+  const searchQueryList = useSelector((state) => state.listAll.searchQueryList)
+
+  const [searchOpen, setSearchOpen] = useState(false)
+  const searchOpenHandler = () => {
+    setSearchOpen(true)
   }
   const searchTextHandler = (e) => {
-    setSearch({ ...search, searchText: e.target.value })
+    dispatch({ type: LIST_GET_ALL_SEARCH, payload: e.target.value })
   }
   const clearSearchHandler = () => {
-    setSearch({ ...search, searchText: '' })
-    if (search.searchText === '' && search.open === true) {
-      setSearch({ ...search, open: false })
+    searchQueryList && dispatch({ type: LIST_GET_ALL_SEARCH, payload: '' })
+    if (searchQueryList === '' && searchOpen === true) {
+      setSearchOpen(false)
     }
   }
 
@@ -20,14 +25,14 @@ const SearchComponent = ({ type }) => {
     <SearchStyled type={type}>
       <div
         className={`search ${
-          search.open || type === 'Daily Notes' ? 'active' : 'click-fx'
+          searchOpen || type === 'Daily Notes' ? 'active' : 'click-fx'
         }`}
       >
         <div
           className={`${
             type === 'Daily List' ? 'icon' : type === 'Daily Notes' && 'icon-sm'
           }`}
-          onClick={searchHandler}
+          onClick={searchOpenHandler}
         ></div>
         <div
           className={`${
@@ -38,7 +43,7 @@ const SearchComponent = ({ type }) => {
         >
           <input
             type="text"
-            value={search.searchText}
+            value={type === 'Daily List' ? searchQueryList : ''}
             onChange={searchTextHandler}
             placeholder="Search..."
             className="bw-selection"
@@ -51,7 +56,7 @@ const SearchComponent = ({ type }) => {
               ? 'clear'
               : type === 'Daily Notes' && 'clear-sm'
           }`}
-          onClick={clearSearchHandler}
+          onClick={type === 'Daily List' ? clearSearchHandler : null}
         ></span>
       </div>
     </SearchStyled>
