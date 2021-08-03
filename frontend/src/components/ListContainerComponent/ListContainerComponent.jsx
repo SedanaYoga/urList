@@ -21,14 +21,14 @@ const ListContainerComponent = () => {
   return (
     <ListContainerStyled>
       {checkedCheckbox.map((column, index) => (
-        <div key={index} className="list-type division">
+        <div key={index} className="list-type division ">
           <div className="list-type title-box noselect">
             <p className="list-type-name">{capitalize(column)}</p>
             <div className="list-amount">
               <p>1</p>
             </div>
           </div>
-          <div className="list-container">
+          <div className="list-container noscrollbar">
             {search(lists)
               .filter((list) => list.type === column)
               .map(

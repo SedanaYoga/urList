@@ -49,6 +49,22 @@ body {
     }
   }
 }
+
+.noscrollbar {
+  overflow-y: scroll; /* Add the ability to scroll */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.noscrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.noscrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .bw-selection {
   ::-moz-selection { /* Code for Firefox */
   color: white;

@@ -1,5 +1,8 @@
 import axios from 'axios'
 import {
+  LIST_CREATE_FAIL,
+  LIST_CREATE_REQUEST,
+  LIST_CREATE_SUCCESS,
   LIST_GET_ALL_CHECKED,
   LIST_GET_ALL_FAIL,
   LIST_GET_ALL_REQUEST,
@@ -18,6 +21,22 @@ export const listAllLists = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LIST_GET_ALL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const createAList = (list) => async (dispatch) => {
+  try {
+    dispatch({ type: LIST_CREATE_REQUEST })
+    const { data } = await axios.post('/api/lists', list)
+    dispatch({ type: LIST_CREATE_SUCCESS, payload: data })
+  } catch (error) {
+    dispatch({
+      type: LIST_CREATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

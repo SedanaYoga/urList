@@ -5,12 +5,17 @@ import { ReactComponent as TimeSVG } from '../../images/time-icon.svg'
 import { ReactComponent as DeleteSVG } from '../../images/delete-icon.svg'
 import { ReactComponent as EditSVG } from '../../images/edit-icon.svg'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { decryptData } from '../../helper/secure'
 
 const ListBoxComponent = ({ theList }) => {
   const [copiedUrl, setCopiedUrl] = useState(false)
   const [copiedUname, setCopiedUname] = useState(false)
   const [copiedDetail, setCopiedDetail] = useState(false)
   const listIcon = { account: '🤝', command: '👏', note: '✍' }
+  theList.details.theDetail =
+    theList.type === 'account'
+      ? decryptData(theList.details.theDetail)
+      : theList.details.theDetail
   const { details } = theList
 
   const updatedTime = new Date(theList.updatedAt)

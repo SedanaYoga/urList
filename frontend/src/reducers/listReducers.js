@@ -1,4 +1,7 @@
 import {
+  LIST_CREATE_FAIL,
+  LIST_CREATE_REQUEST,
+  LIST_CREATE_SUCCESS,
   LIST_GET_ALL_CHECKED,
   LIST_GET_ALL_FAIL,
   LIST_GET_ALL_REQUEST,
@@ -35,6 +38,19 @@ export const listAllReducer = (
       }
     case LIST_GET_ALL_FAIL:
       return { ...state, loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const listCreateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case LIST_CREATE_REQUEST:
+      return { loading: true }
+    case LIST_CREATE_SUCCESS:
+      return { loading: false, success: true, list: action.payload }
+    case LIST_CREATE_FAIL:
+      return { loading: false, error: action.payload }
     default:
       return state
   }

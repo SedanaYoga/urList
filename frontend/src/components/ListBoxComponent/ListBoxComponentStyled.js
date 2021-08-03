@@ -16,8 +16,9 @@ export const ListBoxStyled = styled.div`
     min-height: 100px;
     border-radius: 26px;
     background: ${(props) => props.theme.color1};
-    filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.1));
+    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.1));
     padding: 1em 1em 1.5em;
+    margin-bottom: 0.5em;
   }
   .list-header {
     position: relative;
@@ -98,8 +99,8 @@ export const ListBoxStyled = styled.div`
     position: absolute;
     content: '';
     margin-top: 0.5em;
-    left: -25px;
-    width: 380px;
+    left: -15px;
+    width: 374px;
     height: 0px;
     border: 1px solid ${(props) => props.theme.color2};
   }
