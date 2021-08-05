@@ -12,7 +12,7 @@ const ListBoxComponent = ({ theList }) => {
   const [copiedUname, setCopiedUname] = useState(false)
   const [copiedDetail, setCopiedDetail] = useState(false)
   const listIcon = { account: '🤝', command: '👏', note: '✍' }
-  theList.details.theDetail =
+  const outputDetail =
     theList.type === 'account'
       ? decryptData(theList.details.theDetail)
       : theList.details.theDetail
@@ -79,7 +79,7 @@ const ListBoxComponent = ({ theList }) => {
             </CopyToClipboard>
           )}
           <CopyToClipboard
-            text={details.theDetail}
+            text={outputDetail}
             onCopy={() => setCopiedDetail(true)}
           >
             <input
@@ -91,7 +91,7 @@ const ListBoxComponent = ({ theList }) => {
                   : `text`
               }
               onClick={setTimeout(() => setCopiedDetail(false), 2000)}
-              value={!copiedDetail ? details.theDetail : 'copied!'}
+              value={!copiedDetail ? outputDetail : 'copied!'}
               readOnly
               className="list-detail flex-center bw-selection"
             ></input>

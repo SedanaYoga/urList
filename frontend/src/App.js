@@ -85,6 +85,10 @@ body {
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
+input {
+  font-family: 'Nunito';
+  
+}
 .flex-center {
     display: flex;
     justify-content: center;

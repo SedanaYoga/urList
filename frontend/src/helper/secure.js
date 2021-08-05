@@ -1,6 +1,6 @@
 import CryptoJS from 'crypto-js'
 
-const passphrase = 'Z97_i7MW-h3k!'
+const passphrase = process.env.REACT_APP_SECRET_PASSPHRASE
 
 export const decryptData = (ciphertext) => {
   const bytes = CryptoJS.AES.decrypt(ciphertext, passphrase)

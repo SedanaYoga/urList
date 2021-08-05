@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listAllLists } from '../../actions/listActions'
 import {
@@ -16,16 +16,25 @@ import { ReactComponent as SettingsSVG } from '../../images/settings-side.svg'
 import { ReactComponent as AllActivitySVG } from '../../images/all-activity-side.svg'
 import DropdownComponent from '../../components/DropdownComponent/DropdownComponent'
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent.jsx'
-import { ReactComponent as AddSVG } from '../../images/add-icon.svg'
 import HeaderComponent from '../../components/HeaderComponent/HeaderComponent'
 import ListContainerComponent from '../../components/ListContainerComponent/ListContainerComponent'
 import NoteContainerComponent from '../../components/NoteContainerComponent/NoteContainerComponent'
 import LoaderComponent from '../../components/LoaderComponent/LoaderComponent'
+import ModalComponent from '../../components/ModalComponent/ModalComponent'
+import CreateListComponent from '../../components/CreateListComponent/CreateListComponent'
 const DashboardScreen = () => {
+  const [createModalIsOpen, setCreateModalIsOpen] = useState(false)
   const dispatch = useDispatch()
 
   const listAll = useSelector((state) => state.listAll)
   const { loading, error } = listAll
+
+  const openCreateModalHandler = () => {
+    setCreateModalIsOpen(true)
+  }
+  const closeCreateModalHandler = () => {
+    setCreateModalIsOpen(false)
+  }
 
   useEffect(() => {
     dispatch(listAllLists())
@@ -33,6 +42,8 @@ const DashboardScreen = () => {
 
   return (
     <ContainerStyled>
+      {/* LEFT BAR */}
+
       <LeftSideBarStyled>
         <div className="noselect">
           <LogoStyled>
@@ -46,7 +57,6 @@ const DashboardScreen = () => {
               <p>urList App</p>
             </div>
           </LogoStyled>
-
           <MenuSideStyled>
             <Link to="/" className="menu-side">
               <DashboardSVG fill="black" width="22" />
@@ -65,11 +75,17 @@ const DashboardScreen = () => {
             <DropdownComponent />
           </FilterDropdownStyled>
         </div>
-        <ButtonComponent>
-          <AddSVG style={{ marginRight: '0.5em' }} /> Create List
-        </ButtonComponent>
+        <div onClick={openCreateModalHandler}>
+          <ButtonComponent>Create List</ButtonComponent>
+        </div>
+        {createModalIsOpen ? (
+          <ModalComponent close={closeCreateModalHandler}>
+            <CreateListComponent />
+          </ModalComponent>
+        ) : null}
       </LeftSideBarStyled>
 
+      {/* MIDDLE BAR */}
       <MiddleSideBarStyled>
         {error && <div>{error.message}</div>}
         {loading ? (
@@ -81,6 +97,9 @@ const DashboardScreen = () => {
           </>
         )}
       </MiddleSideBarStyled>
+
+      {/* RIGHT BAR */}
+
       <RightSideBarStyled>
         <HeaderComponent type="Daily Notes" />
         <NoteContainerComponent></NoteContainerComponent>

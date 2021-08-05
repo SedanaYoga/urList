@@ -14,7 +14,6 @@ const DropdownMenu = ({ hook }) => {
   const listAll = useSelector((state) => state.listAll)
   const { lists, checkedCheckbox } = listAll
   const listType = [...new Set(lists.map((list) => list.type))]
-  console.log(listType)
   const typeAlias = {
     account: '🤝 Account',
     command: '👏 Command',

@@ -7,16 +7,22 @@ import {
   LIST_GET_ALL_FAIL,
   LIST_GET_ALL_REQUEST,
   LIST_GET_ALL_SUCCESS,
+  LIST_GET_ALL_TYPES,
 } from '../constants/listConstant'
 
 export const listAllLists = () => async (dispatch) => {
   try {
     dispatch({ type: LIST_GET_ALL_REQUEST })
     const { data } = await axios.get('/api/lists')
+    const listType = [...new Set(data.map((list) => list.type))]
     dispatch({ type: LIST_GET_ALL_SUCCESS, payload: data })
     dispatch({
       type: LIST_GET_ALL_CHECKED,
-      payload: [...new Set(data.map((list) => list.type))],
+      payload: listType,
+    })
+    dispatch({
+      type: LIST_GET_ALL_TYPES,
+      payload: listType,
     })
   } catch (error) {
     dispatch({

@@ -19,19 +19,11 @@ export const ButtonStyled = styled.button`
   :hover {
     background: ${(props) => props.theme.buttonColor};
     color: #fff;
-    svg {
-      fill: #fff;
-    }
+
     :active {
       transition: none;
       background: #fff;
       color: ${(props) => props.theme.buttonColor};
-      svg {
-        fill: ${(props) => props.theme.buttonColor};
-      }
     }
-  }
-  svg {
-    fill: ${(props) => props.theme.buttonColor};
   }
 `

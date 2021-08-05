@@ -16,8 +16,6 @@ const NoteContainerComponent = () => {
   }
   const keyUpHandler = (e) => {
     inputText === '' ? setTextH(50) : setTextH(e.target.scrollHeight)
-
-    console.log(textH)
   }
   return (
     <NoteContainerStyled textH={textH}>

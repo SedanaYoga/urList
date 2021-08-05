@@ -7,11 +7,13 @@ import {
   LIST_GET_ALL_REQUEST,
   LIST_GET_ALL_SEARCH,
   LIST_GET_ALL_SUCCESS,
+  LIST_GET_ALL_TYPES,
 } from '../constants/listConstant'
 
 export const listAllReducer = (
   state = {
     lists: [],
+    listTypes: [],
     checkedCheckbox: [],
     searchQueryList: '',
   },
@@ -30,6 +32,11 @@ export const listAllReducer = (
       return {
         ...state,
         checkedCheckbox: action.payload,
+      }
+    case LIST_GET_ALL_TYPES:
+      return {
+        ...state,
+        listTypes: action.payload,
       }
     case LIST_GET_ALL_SEARCH:
       return {
