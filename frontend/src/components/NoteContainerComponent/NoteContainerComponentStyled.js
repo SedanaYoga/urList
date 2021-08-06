@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const NoteContainerStyled = styled.div`
   /* background: black; */
   position: relative;
-  height: 760px;
+  height: 770px;
   .header-note {
     /* background: cyan; */
     min-width: 365px;
@@ -18,7 +18,8 @@ export const NoteContainerStyled = styled.div`
     color: ${(props) => props.theme.color4};
   }
   .note-content {
-    height: 640px;
+    height: ${(props) =>
+      640 - ((props.textH < 150 ? props.textH : 150) - 50)}px;
     margin-bottom: 10px;
   }
   textarea {

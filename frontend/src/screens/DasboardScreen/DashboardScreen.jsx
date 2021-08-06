@@ -32,9 +32,6 @@ const DashboardScreen = () => {
   const openCreateModalHandler = () => {
     setCreateModalIsOpen(true)
   }
-  const closeCreateModalHandler = () => {
-    setCreateModalIsOpen(false)
-  }
 
   useEffect(() => {
     dispatch(listAllLists())
@@ -79,7 +76,10 @@ const DashboardScreen = () => {
           <ButtonComponent>Create List</ButtonComponent>
         </div>
         {createModalIsOpen ? (
-          <ModalComponent close={closeCreateModalHandler}>
+          <ModalComponent
+            setCreateModalIsOpen={setCreateModalIsOpen}
+            createModalIsOpen={createModalIsOpen}
+          >
             <CreateListComponent />
           </ModalComponent>
         ) : null}

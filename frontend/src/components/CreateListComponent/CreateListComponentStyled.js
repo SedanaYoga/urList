@@ -130,14 +130,26 @@ export const CreateListStyled = styled.div`
     }
   }
   .pass-container {
-    width: 371px;
-    display: flex;
-    justify-content: space-between;
+    /* display: flex;
+    justify-content: flex-start;
     flex-direction: row;
-    align-items: center;
-    svg {
-      cursor: pointer;
-    }
+    align-items: center; */
+    width: 344px;
+    position: relative;
+    /* background: red; */
+  }
+  .pass-svg {
+    position: absolute;
+    width: 40px;
+    height: 87%;
+    border-left: 2px solid ${(props) => props.theme.color3};
+    cursor: pointer;
+    top: 55%;
+    right: 0;
+    transform: translateY(-50%);
+  }
+  input.account-input {
+    padding-right: 3em;
   }
   .command-input {
     width: 100%;

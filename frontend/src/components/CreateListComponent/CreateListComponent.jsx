@@ -34,6 +34,10 @@ const CreateListComponent = () => {
   const listTypes = useSelector((state) => state.listAll.listTypes)
   const selectTypeHandler = (e) => {
     setSelectedType(e.target.innerText.toLowerCase())
+    setListName('')
+    setListUrl('')
+    setListUsername('')
+    setListTheDetail('')
   }
   return (
     <CreateListStyled>
@@ -98,6 +102,7 @@ const CreateListComponent = () => {
               <div className="pass-container">
                 <input
                   value={listTheDetail}
+                  className="account-input"
                   onChange={(e) => setListTheDetail(e.target.value)}
                   type={isPassVisible ? `text` : `password`}
                 ></input>
