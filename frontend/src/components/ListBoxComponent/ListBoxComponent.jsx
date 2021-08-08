@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { ListBoxStyled } from './ListBoxComponentStyled'
-// import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { ReactComponent as TimeSVG } from '../../images/time-icon.svg'
 import { ReactComponent as DeleteSVG } from '../../images/delete-icon.svg'
 import { ReactComponent as EditSVG } from '../../images/edit-icon.svg'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { decryptData } from '../../helper/secure'
+import { listAllLists, deleteAList } from '../../actions/listActions'
 
 const ListBoxComponent = ({ theList }) => {
+  const dispatch = useDispatch()
   const [copiedUrl, setCopiedUrl] = useState(false)
   const [copiedUname, setCopiedUname] = useState(false)
   const [copiedDetail, setCopiedDetail] = useState(false)
@@ -27,6 +29,16 @@ const ListBoxComponent = ({ theList }) => {
   const updatedWeekday = updatedTime.toLocaleString('default', {
     weekday: 'long',
   })
+
+  const deleteHandler = async () => {
+    const resolveAfterDelete = () => {
+      return new Promise((resolve) => {
+        resolve(dispatch(deleteAList(theList._id)))
+      })
+    }
+    await resolveAfterDelete()
+    dispatch(listAllLists())
+  }
   return (
     <ListBoxStyled uName={details.userName} day={updatedWeekday}>
       <div className="list-box">
@@ -100,7 +112,10 @@ const ListBoxComponent = ({ theList }) => {
             <div className="edit-list rounded-btn flex-center">
               <EditSVG />
             </div>
-            <div className="delete-list rounded-btn flex-center">
+            <div
+              className="delete-list rounded-btn flex-center"
+              onClick={deleteHandler}
+            >
               <DeleteSVG />
             </div>
           </div>

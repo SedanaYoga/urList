@@ -7,14 +7,13 @@ const modalRoot = document.getElementById('modal')
 const ModalComponent = ({
   children,
   zIndexProps,
-  createModalIsOpen,
-  setCreateModalIsOpen,
+  modalIsOpen,
+  setModalIsOpen,
 }) => {
   const [diffX, setDiffX] = useState(0)
   const [diffY, setDiffY] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
   const [styles, setStyles] = useState({})
-
   const dragStart = (e) => {
     setDiffX(e.screenX - e.currentTarget.getBoundingClientRect().left)
     setDiffY(e.screenY - e.currentTarget.getBoundingClientRect().top)
@@ -36,11 +35,11 @@ const ModalComponent = ({
 
   const keyPress = useCallback(
     (e) => {
-      if (e.key === 'Escape' && createModalIsOpen) {
-        setCreateModalIsOpen(false)
+      if (e.key === 'Escape' && modalIsOpen) {
+        setModalIsOpen(false)
       }
     },
-    [setCreateModalIsOpen, createModalIsOpen]
+    [setModalIsOpen, modalIsOpen]
   )
 
   useEffect(() => {
@@ -49,11 +48,12 @@ const ModalComponent = ({
   }, [keyPress])
 
   return ReactDOM.createPortal(
-    <ModalStyled zIndexProps={zIndexProps}>
-      <div
-        className="overlay"
-        onClick={() => setCreateModalIsOpen(false)}
-      ></div>
+    <ModalStyled
+      zIndexProps={zIndexProps}
+      diffX={diffX}
+      isDragging={isDragging}
+    >
+      <div className="overlay" onClick={() => setModalIsOpen(false)}></div>
       <div
         className="modal-container"
         onMouseDown={dragStart}

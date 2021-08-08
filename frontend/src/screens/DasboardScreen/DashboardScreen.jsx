@@ -77,10 +77,10 @@ const DashboardScreen = () => {
         </div>
         {createModalIsOpen ? (
           <ModalComponent
-            setCreateModalIsOpen={setCreateModalIsOpen}
-            createModalIsOpen={createModalIsOpen}
+            setModalIsOpen={setCreateModalIsOpen}
+            ModalIsOpen={createModalIsOpen}
           >
-            <CreateListComponent />
+            <CreateListComponent setCreateModalIsOpen={setCreateModalIsOpen} />
           </ModalComponent>
         ) : null}
       </LeftSideBarStyled>

@@ -13,10 +13,10 @@ export const ModalStyled = styled.div`
   }
   .modal-container {
     position: absolute;
-    top: 150px;
-    left: 520px;
+    top: 200px;
+    left: 600px;
     min-width: 573px;
-    min-height: 400px;
+    min-height: 50px;
     overflow: hidden;
     background: ${(props) => props.theme.color1};
     z-index: ${(props) =>

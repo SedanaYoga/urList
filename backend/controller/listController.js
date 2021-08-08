@@ -27,3 +27,17 @@ export const postAList = asyncHandler(async (req, res) => {
   const createdList = await list.save()
   res.status(201).json(createdList)
 })
+
+// @desc    Delete a list
+// @route   DELETE /api/lists/:id
+// @access  Public
+export const deleteAList = asyncHandler(async (req, res) => {
+  const list = await List.findById(req.params.id)
+  if (list) {
+    await list.remove()
+    res.json({ message: 'The list is successfully removed!' })
+  } else {
+    res.status(404)
+    throw new Error('The list is not found!')
+  }
+})

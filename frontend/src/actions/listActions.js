@@ -14,7 +14,7 @@ export const listAllLists = () => async (dispatch) => {
   try {
     dispatch({ type: LIST_GET_ALL_REQUEST })
     const { data } = await axios.get('/api/lists')
-    const listType = [...new Set(data.map((list) => list.type))]
+    const listType = ['account', 'command', 'note']
     dispatch({ type: LIST_GET_ALL_SUCCESS, payload: data })
     dispatch({
       type: LIST_GET_ALL_CHECKED,
@@ -40,6 +40,22 @@ export const createAList = (list) => async (dispatch) => {
     dispatch({ type: LIST_CREATE_REQUEST })
     const { data } = await axios.post('/api/lists', list)
     dispatch({ type: LIST_CREATE_SUCCESS, payload: data })
+  } catch (error) {
+    dispatch({
+      type: LIST_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const deleteAList = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: LIST_CREATE_REQUEST })
+    await axios.delete(`/api/lists/${id}`)
+    dispatch({ type: LIST_CREATE_SUCCESS })
   } catch (error) {
     dispatch({
       type: LIST_CREATE_FAIL,

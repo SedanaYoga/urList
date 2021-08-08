@@ -7,7 +7,7 @@ const ListContainerComponent = () => {
   const listAll = useSelector((state) => state.listAll)
   const { lists, checkedCheckbox, searchQueryList } = listAll
   const search = (data) => {
-    const detailKey = data[0].details && Object.keys(data[0].details)
+    const detailKey = ['name', 'url', 'userName', 'theDetail']
     return data.filter((list) =>
       detailKey.some(
         (key) =>
@@ -20,26 +20,33 @@ const ListContainerComponent = () => {
   }
   return (
     <ListContainerStyled>
-      {checkedCheckbox.map((column, index) => (
-        <div key={index} className="list-type division ">
-          <div className="list-type title-box noselect">
-            <p className="list-type-name">{capitalize(column)}</p>
-            <div className="list-amount">
-              <p>1</p>
+      {lists
+        ? checkedCheckbox.map((column, index) => (
+            <div key={index} className="list-type division ">
+              <div className="list-type title-box noselect">
+                <p className="list-type-name">{capitalize(column)}</p>
+                <div className="list-amount">
+                  <p>
+                    {
+                      search(lists).filter((list) => list.type === column)
+                        .length
+                    }
+                  </p>
+                </div>
+              </div>
+              <div className="list-container noscrollbar">
+                {search(lists)
+                  .filter((list) => list.type === column)
+                  .map(
+                    (list, index) =>
+                      list.type === column && (
+                        <ListBoxComponent key={index} theList={list} />
+                      )
+                  )}
+              </div>
             </div>
-          </div>
-          <div className="list-container noscrollbar">
-            {search(lists)
-              .filter((list) => list.type === column)
-              .map(
-                (list, index) =>
-                  list.type === column && (
-                    <ListBoxComponent key={index} theList={list} />
-                  )
-              )}
-          </div>
-        </div>
-      ))}
+          ))
+        : null}
     </ListContainerStyled>
   )
 }

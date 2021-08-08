@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { AddUrlStyled, CreateListStyled } from './CreateListComponentStyled'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { capitalize } from '../../helper/usefullFunc'
 import { ReactComponent as PassShowSVG } from '../../images/pass-show.svg'
 import { ReactComponent as PassHideSVG } from '../../images/pass-hidden.svg'
 import ButtonComponent from '../ButtonComponent/ButtonComponent'
 import ModalComponent from '../ModalComponent/ModalComponent'
+import { createAList, listAllLists } from '../../actions/listActions'
 
 const AddUrlComponent = ({ listUrl, setListUrl }) => {
   return (
@@ -21,7 +22,8 @@ const AddUrlComponent = ({ listUrl, setListUrl }) => {
   )
 }
 
-const CreateListComponent = () => {
+const CreateListComponent = ({ setCreateModalIsOpen, history }) => {
+  const dispatch = useDispatch()
   const [selectedType, setSelectedType] = useState('account')
   const [isPassVisible, setIsPassVisible] = useState(false)
   const [isShowModalUrl, setIsShowModalUrl] = useState(false)
@@ -38,6 +40,29 @@ const CreateListComponent = () => {
     setListUrl('')
     setListUsername('')
     setListTheDetail('')
+  }
+
+  const createAListHandler = async () => {
+    const resolveAfterCreateList = () => {
+      return new Promise((resolve) => {
+        resolve(
+          dispatch(
+            createAList({
+              type: selectedType,
+              details: {
+                name: listName,
+                url: listUrl,
+                userName: listUsername,
+                theDetail: listTheDetail,
+              },
+            })
+          )
+        )
+      })
+    }
+    await resolveAfterCreateList()
+    dispatch(listAllLists())
+    setCreateModalIsOpen(false)
   }
   return (
     <CreateListStyled>
@@ -83,7 +108,8 @@ const CreateListComponent = () => {
         </div>
         {isShowModalUrl && (
           <ModalComponent
-            close={() => setIsShowModalUrl(false)}
+            modalIsOpen={isShowModalUrl}
+            setModalIsOpen={setIsShowModalUrl}
             zIndexProps="1"
           >
             <AddUrlComponent listUrl={listUrl} setListUrl={setListUrl} />
@@ -140,7 +166,9 @@ const CreateListComponent = () => {
         </div>
       </div>
       <div className="create-now-btn flex-center">
-        <ButtonComponent>Create Now</ButtonComponent>
+        <ButtonComponent clickFunc={createAListHandler}>
+          Create Now
+        </ButtonComponent>
       </div>
     </CreateListStyled>
   )
