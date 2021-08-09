@@ -1,18 +1,13 @@
 import React, { useState } from 'react'
-import {
-  AddUrlStyled,
-  CreateListStyled,
-  NoteEditStyled,
-} from './CreateListComponentStyled'
+import { AddUrlStyled, CreateListStyled } from './UpdateListComponentStyled'
 import { useDispatch, useSelector } from 'react-redux'
 import { capitalize } from '../../helper/usefullFunc'
 import { ReactComponent as PassShowSVG } from '../../images/pass-show.svg'
 import { ReactComponent as PassHideSVG } from '../../images/pass-hidden.svg'
 import ButtonComponent from '../ButtonComponent/ButtonComponent'
 import ModalComponent from '../ModalComponent/ModalComponent'
-import { createAList, listAllLists } from '../../actions/listActions'
-import ReactMarkdown from 'react-markdown'
-import gfm from 'remark-gfm'
+import { updateAList, listAllLists } from '../../actions/listActions'
+import { decryptData } from '../../helper/secure'
 
 const AddUrlComponent = ({ listUrl, setListUrl }) => {
   return (
@@ -28,74 +23,29 @@ const AddUrlComponent = ({ listUrl, setListUrl }) => {
   )
 }
 
-const EditNoteComponent = () => {
-  const [viewSelect, setViewSelect] = useState('original')
-  const viewOptions = ['original', 'markdown']
-  return (
-    <NoteEditStyled viewSelect={viewSelect}>
-      <div className="container">
-        <div className="edit-note-title">
-          <p>Edit with markdown 🙄</p>
-        </div>
-        <div className="edit-field-container">
-          <div className="select-view">
-            {viewOptions.map((option, i) => (
-              <div
-                key={i}
-                className={`flex-center ${
-                  option === viewSelect ? `active` : null
-                }`}
-                onClick={(e) => {
-                  setViewSelect(option)
-                }}
-              >
-                {capitalize(option)}
-              </div>
-            ))}
-          </div>
-          <textarea
-            className="edit-field noscrollbar"
-            placeholder="input your markdown here..."
-            cols="30"
-            rows="20"
-          ></textarea>
-        </div>
-
-        <div className="submit-btn flex-right">
-          <ButtonComponent>Submit</ButtonComponent>
-        </div>
-      </div>
-    </NoteEditStyled>
-  )
-}
-
-const CreateListComponent = ({ setCreateModalIsOpen }) => {
+const UpdateListComponent = ({ setUpdateModalIsOpen, list }) => {
   const dispatch = useDispatch()
-  const [selectedType, setSelectedType] = useState('account')
   const [isPassVisible, setIsPassVisible] = useState(false)
   const [isShowModalUrl, setIsShowModalUrl] = useState(false)
-  const [isShowModalNote, setIsShowModalNote] = useState(false)
-
-  const [listName, setListName] = useState('')
-  const [listUrl, setListUrl] = useState('')
-  const [listUsername, setListUsername] = useState('')
-  const [listTheDetail, setListTheDetail] = useState('')
 
   const listTypes = useSelector((state) => state.listAll.listTypes)
-  const selectTypeHandler = (e) => {
-    setSelectedType(e.target.innerText.toLowerCase())
-    setListName('')
-    setListUrl('')
-    setListUsername('')
-    setListTheDetail('')
-  }
+  const { _id, type: selectedType, details } = list
+  const { name, url, userName, theDetail } = details
+  const outputDetail =
+    selectedType === 'account' ? decryptData(theDetail) : theDetail
 
-  const createAListHandler = async () => {
-    const resolveAfterCreateList = () => {
+  const [listName, setListName] = useState(name)
+  const [listUrl, setListUrl] = useState(url)
+  const [listUsername, setListUsername] = useState(userName)
+  const [listTheDetail, setListTheDetail] = useState(outputDetail)
+
+  const updateAListHandler = async () => {
+    const resolveAfterUpdateList = () => {
       return new Promise((resolve) => {
         resolve(
           dispatch(
-            createAList({
+            updateAList({
+              _id: _id,
               type: selectedType,
               details: {
                 name: listName,
@@ -108,14 +58,15 @@ const CreateListComponent = ({ setCreateModalIsOpen }) => {
         )
       })
     }
-    await resolveAfterCreateList()
+    await resolveAfterUpdateList()
     dispatch(listAllLists())
-    setCreateModalIsOpen(false)
+    setUpdateModalIsOpen(false)
   }
+
   return (
     <CreateListStyled>
       <div className="header">
-        <div className="title noselect">Let's create it!</div>
+        <div className="title noselect">Go update it!</div>
         <div className="switch-type">
           {listTypes.map((type, i) => (
             <div
@@ -123,7 +74,6 @@ const CreateListComponent = ({ setCreateModalIsOpen }) => {
               className={`type flex-center noselect ${
                 selectedType === type ? 'selected' : null
               }`}
-              onClick={selectTypeHandler}
             >
               {capitalize(type)}
             </div>
@@ -150,12 +100,7 @@ const CreateListComponent = ({ setCreateModalIsOpen }) => {
             </div>
           ) : (
             selectedType === 'note' && (
-              <div
-                className="sm-button noselect"
-                onClick={() => setIsShowModalNote(true)}
-              >
-                📝editView
-              </div>
+              <div className="sm-button noselect">📝editView</div>
             )
           )}
         </div>
@@ -166,20 +111,6 @@ const CreateListComponent = ({ setCreateModalIsOpen }) => {
             zIndexProps="1"
           >
             <AddUrlComponent listUrl={listUrl} setListUrl={setListUrl} />
-          </ModalComponent>
-        )}
-        {isShowModalNote && (
-          <ModalComponent
-            modalIsOpen={isShowModalNote}
-            setModalIsOpen={setIsShowModalNote}
-            zIndexProps="1"
-            styleProps={{
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-            }}
-          >
-            <EditNoteComponent />
           </ModalComponent>
         )}
         <div className="thedetail-container">
@@ -233,12 +164,12 @@ const CreateListComponent = ({ setCreateModalIsOpen }) => {
         </div>
       </div>
       <div className="create-now-btn flex-center">
-        <ButtonComponent clickFunc={createAListHandler}>
-          Create Now
+        <ButtonComponent clickFunc={updateAListHandler}>
+          Update Now
         </ButtonComponent>
       </div>
     </CreateListStyled>
   )
 }
 
-export default CreateListComponent
+export default UpdateListComponent

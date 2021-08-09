@@ -11,6 +11,9 @@ import {
   LIST_GET_ALL_SEARCH,
   LIST_GET_ALL_SUCCESS,
   LIST_GET_ALL_TYPES,
+  LIST_UPDATE_FAIL,
+  LIST_UPDATE_REQUEST,
+  LIST_UPDATE_SUCCESS,
 } from '../constants/listConstant'
 
 export const listAllReducer = (
@@ -73,6 +76,19 @@ export const listDeleteReducer = (state = {}, action) => {
     case LIST_DELETE_SUCCESS:
       return { loading: false, success: true }
     case LIST_DELETE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const listUpdateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case LIST_UPDATE_REQUEST:
+      return { loading: true }
+    case LIST_UPDATE_SUCCESS:
+      return { loading: false, success: true, list: action.payload }
+    case LIST_UPDATE_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state

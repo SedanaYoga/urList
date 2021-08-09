@@ -8,6 +8,9 @@ import {
   LIST_GET_ALL_REQUEST,
   LIST_GET_ALL_SUCCESS,
   LIST_GET_ALL_TYPES,
+  LIST_UPDATE_FAIL,
+  LIST_UPDATE_REQUEST,
+  LIST_UPDATE_SUCCESS,
 } from '../constants/listConstant'
 
 export const listAllLists = () => async (dispatch) => {
@@ -59,6 +62,22 @@ export const deleteAList = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LIST_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const updateAList = (list) => async (dispatch) => {
+  try {
+    dispatch({ type: LIST_UPDATE_REQUEST })
+    const { data } = await axios.put(`/api/lists/${list._id}`, list)
+    dispatch({ type: LIST_UPDATE_SUCCESS, payload: data })
+  } catch (error) {
+    dispatch({
+      type: LIST_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

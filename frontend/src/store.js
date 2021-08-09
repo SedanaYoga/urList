@@ -5,12 +5,14 @@ import {
   listAllReducer,
   listCreateReducer,
   listDeleteReducer,
+  listUpdateReducer,
 } from './reducers/listReducers'
 
 const reducer = combineReducers({
   listAll: listAllReducer,
   listCreate: listCreateReducer,
   listDelete: listDeleteReducer,
+  listUpdate: listUpdateReducer,
 })
 
 const initialState = {}

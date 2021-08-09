@@ -9,6 +9,7 @@ const ModalComponent = ({
   zIndexProps,
   modalIsOpen,
   setModalIsOpen,
+  styleProps,
 }) => {
   const [diffX, setDiffX] = useState(0)
   const [diffY, setDiffY] = useState(0)
@@ -48,18 +49,14 @@ const ModalComponent = ({
   }, [keyPress])
 
   return ReactDOM.createPortal(
-    <ModalStyled
-      zIndexProps={zIndexProps}
-      diffX={diffX}
-      isDragging={isDragging}
-    >
+    <ModalStyled zIndexProps={zIndexProps}>
       <div className="overlay" onClick={() => setModalIsOpen(false)}></div>
       <div
         className="modal-container"
         onMouseDown={dragStart}
         onMouseMove={dragging}
         onMouseUp={dragEnd}
-        style={styles}
+        style={styleProps ? styleProps : styles}
       >
         <div className="modal-children">{children}</div>
       </div>

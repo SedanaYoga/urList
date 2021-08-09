@@ -7,9 +7,14 @@ import { ReactComponent as EditSVG } from '../../images/edit-icon.svg'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { decryptData } from '../../helper/secure'
 import { listAllLists, deleteAList } from '../../actions/listActions'
+import ModalComponent from '../ModalComponent/ModalComponent'
+import UpdateListComponent from '../UpdateListComponent/UpdateListComponent'
 
 const ListBoxComponent = ({ theList }) => {
   const dispatch = useDispatch()
+
+  const [updateModalIsOpen, setUpdateModalIsOpen] = useState(false)
+
   const [copiedUrl, setCopiedUrl] = useState(false)
   const [copiedUname, setCopiedUname] = useState(false)
   const [copiedDetail, setCopiedDetail] = useState(false)
@@ -90,28 +95,49 @@ const ListBoxComponent = ({ theList }) => {
               </div>
             </CopyToClipboard>
           )}
-          <CopyToClipboard
-            text={outputDetail}
-            onCopy={() => setCopiedDetail(true)}
-          >
-            <input
-              type={
-                theList.type !== 'account'
-                  ? `text`
-                  : !copiedDetail
-                  ? `password`
-                  : `text`
-              }
-              onClick={setTimeout(() => setCopiedDetail(false), 2000)}
-              value={!copiedDetail ? outputDetail : 'copied!'}
-              readOnly
-              className="list-detail flex-center bw-selection"
-            ></input>
-          </CopyToClipboard>
+          {theList.type !== 'note' ? (
+            <CopyToClipboard
+              text={outputDetail}
+              onCopy={() => setCopiedDetail(true)}
+            >
+              <input
+                type={
+                  theList.type !== 'account'
+                    ? `text`
+                    : !copiedDetail
+                    ? `password`
+                    : `text`
+                }
+                onClick={setTimeout(() => setCopiedDetail(false), 2000)}
+                value={!copiedDetail ? outputDetail : 'copied!'}
+                readOnly
+                className="list-detail flex-center bw-selection"
+              ></input>
+            </CopyToClipboard>
+          ) : (
+            <div className="detail-expand-btn flex-center click-fx noselect">
+              Expand Note
+            </div>
+          )}
+
           <div className="modif-list flex-center">
-            <div className="edit-list rounded-btn flex-center">
+            <div
+              className="edit-list rounded-btn flex-center"
+              onClick={() => setUpdateModalIsOpen(true)}
+            >
               <EditSVG />
             </div>
+            {updateModalIsOpen && (
+              <ModalComponent
+                setModalIsOpen={setUpdateModalIsOpen}
+                modalIsOpen={updateModalIsOpen}
+              >
+                <UpdateListComponent
+                  setUpdateModalIsOpen={setUpdateModalIsOpen}
+                  list={theList}
+                />
+              </ModalComponent>
+            )}
             <div
               className="delete-list rounded-btn flex-center"
               onClick={deleteHandler}

@@ -41,6 +41,8 @@ export const DropdownComponentStyled = styled.div`
     align-items: center;
     justify-content: center;
     transition: filter 300ms;
+    transform: ${(props) =>
+      !props.open ? `rotate(-0.25turn)` : `rotate(0turn)`};
   }
 
   .icon-button svg:hover {

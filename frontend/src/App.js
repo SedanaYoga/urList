@@ -95,6 +95,12 @@ input {
     align-items: center;
     flex-direction: column;
   }
+.flex-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: row;
+  }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -106,6 +112,8 @@ const theme = {
   color2: '#F4F5F7',
   color3: '#DADADA',
   color4: '#9d9d9d',
+  color5: '#474747',
+  color6: '#000000',
   buttonColor: '#2e4acd',
   lineColor1: '#F1F1F1',
 }

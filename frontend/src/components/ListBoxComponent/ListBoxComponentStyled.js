@@ -120,6 +120,18 @@ export const ListBoxStyled = styled.div`
     font-family: 'Nunito';
     cursor: pointer;
   }
+  .detail-expand-btn {
+    width: 211px;
+    height: 34px;
+    border-radius: 8px;
+    background: ${(props) => props.theme.color3};
+    color: ${(props) => props.theme.color1};
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Nunito';
+    cursor: pointer;
+    transition: all 200ms ease-out;
+  }
   .list-username {
     position: absolute;
     bottom: 45px;

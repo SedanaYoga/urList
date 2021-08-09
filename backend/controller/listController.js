@@ -41,3 +41,24 @@ export const deleteAList = asyncHandler(async (req, res) => {
     throw new Error('The list is not found!')
   }
 })
+
+// @desc    Update a list
+// @route   PUT /api/lists/:id
+// @access  Public
+export const updateAList = asyncHandler(async (req, res) => {
+  const { type, details } = req.body
+  const list = await List.findById(req.params.id)
+  if (list) {
+    list.type = type
+    list.details.name = details.name
+    list.details.url = details.url
+    list.details.userName = details.userName
+    list.details.theDetail = details.theDetail
+
+    const updatedList = await list.save()
+    res.status(201).json(updatedList)
+  } else {
+    res.status(404)
+    throw new Error('List is not found')
+  }
+})
