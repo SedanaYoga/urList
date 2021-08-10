@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ListBoxStyled } from './ListBoxComponentStyled'
+import { ExpandNoteStyled, ListBoxStyled } from './ListBoxComponentStyled'
 import { useDispatch } from 'react-redux'
 import { ReactComponent as TimeSVG } from '../../images/time-icon.svg'
 import { ReactComponent as DeleteSVG } from '../../images/delete-icon.svg'
@@ -9,11 +9,59 @@ import { decryptData } from '../../helper/secure'
 import { listAllLists, deleteAList } from '../../actions/listActions'
 import ModalComponent from '../ModalComponent/ModalComponent'
 import UpdateListComponent from '../UpdateListComponent/UpdateListComponent'
+import ReactMarkdown from 'react-markdown'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+
+const ExpandNoteComponent = ({ outputDetail, noteName }) => {
+  const components = {
+    code({ node, inline, className, children, ...props }) {
+      const match = /language-(\w+)/.exec(className || '')
+      return !inline && match ? (
+        <SyntaxHighlighter
+          style={materialOceanic}
+          customStyle={{
+            borderRadius: '15px',
+            fontFamily: 'Fira Code',
+            fontSize: '18px',
+            padding: '15px',
+          }}
+          showLineNumbers
+          wrapLongLines
+          language={match[1]}
+          PreTag="div"
+          children={String(children).replace(/\n$/, '')}
+          {...props}
+        />
+      ) : (
+        <code className={className} {...props}>
+          {children}
+        </code>
+      )
+    },
+  }
+  return (
+    <ExpandNoteStyled>
+      <div className="container">
+        <div className="note-title">
+          <p>Here we go 🤘</p>
+          <span>{noteName}</span>
+        </div>
+        <ReactMarkdown
+          className="note-field noscrollbar"
+          components={components}
+          children={outputDetail}
+        />
+      </div>
+    </ExpandNoteStyled>
+  )
+}
 
 const ListBoxComponent = ({ theList }) => {
   const dispatch = useDispatch()
 
   const [updateModalIsOpen, setUpdateModalIsOpen] = useState(false)
+  const [isExpandNoteModal, setIsExpandNoteModal] = useState(false)
 
   const [copiedUrl, setCopiedUrl] = useState(false)
   const [copiedUname, setCopiedUname] = useState(false)
@@ -115,11 +163,30 @@ const ListBoxComponent = ({ theList }) => {
               ></input>
             </CopyToClipboard>
           ) : (
-            <div className="detail-expand-btn flex-center click-fx noselect">
+            <div
+              className="detail-expand-btn flex-center click-fx noselect"
+              onClick={() => setIsExpandNoteModal(true)}
+            >
               Expand Note
             </div>
           )}
-
+          {isExpandNoteModal && (
+            <ModalComponent
+              zIndexProps="1"
+              setModalIsOpen={setIsExpandNoteModal}
+              modalIsOpen={isExpandNoteModal}
+              styleProps={{
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+            >
+              <ExpandNoteComponent
+                outputDetail={outputDetail}
+                noteName={details.name}
+              />
+            </ModalComponent>
+          )}
           <div className="modif-list flex-center">
             <div
               className="edit-list rounded-btn flex-center"

@@ -189,3 +189,56 @@ export const ListBoxStyled = styled.div`
     }
   }
 `
+export const ExpandNoteStyled = styled.div`
+  width: 1000px;
+  min-height: 680px;
+  padding: 2em 2.5em;
+  .container {
+    width: 100%;
+    height: 100%;
+    /* background: gray; */
+  }
+  .note-title {
+    color: ${(props) => props.theme.color6};
+    font-size: 30px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    p {
+      font-weight: 700;
+      padding-right: 20px;
+      border-right: 5px solid ${(props) => props.theme.color5};
+    }
+    span {
+      font-weight: 600;
+      padding: 8px 15px;
+      border-radius: 0 12px 12px 0;
+      color: ${(props) => props.theme.color5};
+      font-size: 20px;
+
+      background: ${(props) => props.theme.color2};
+    }
+  }
+  .note-field {
+    width: 100%;
+    height: 550px;
+    border: none;
+    border-radius: 26px;
+    outline: none;
+    background: ${(props) => props.theme.color2};
+    padding: 1.3em 1.5em;
+    font-size: 20px;
+    color: ${(props) => props.theme.color5};
+    ::placeholder {
+      color: #bbb;
+      opacity: 1;
+    }
+    box-shadow: -4px 0px 40px rgba(0, 0, 0, 0.03) inset;
+  }
+  .submit-btn {
+    margin: 8px 8px 0 8px;
+    width: 100%;
+  }
+`

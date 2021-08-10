@@ -12,7 +12,8 @@ import ButtonComponent from '../ButtonComponent/ButtonComponent'
 import ModalComponent from '../ModalComponent/ModalComponent'
 import { createAList, listAllLists } from '../../actions/listActions'
 import ReactMarkdown from 'react-markdown'
-import gfm from 'remark-gfm'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 const AddUrlComponent = ({ listUrl, setListUrl }) => {
   return (
@@ -28,9 +29,36 @@ const AddUrlComponent = ({ listUrl, setListUrl }) => {
   )
 }
 
-const EditNoteComponent = () => {
+const EditNoteComponent = ({ submit }) => {
+  const [noteText, setNoteText] = useState('')
   const [viewSelect, setViewSelect] = useState('original')
   const viewOptions = ['original', 'markdown']
+  const components = {
+    code({ node, inline, className, children, ...props }) {
+      const match = /language-(\w+)/.exec(className || '')
+      return !inline && match ? (
+        <SyntaxHighlighter
+          style={materialOceanic}
+          customStyle={{
+            borderRadius: '15px',
+            fontFamily: 'Fira Code',
+            fontSize: '18px',
+            padding: '15px',
+          }}
+          showLineNumbers
+          wrapLongLines
+          language={match[1]}
+          PreTag="div"
+          children={String(children).replace(/\n$/, '')}
+          {...props}
+        />
+      ) : (
+        <code className={className} {...props}>
+          {children}
+        </code>
+      )
+    },
+  }
   return (
     <NoteEditStyled viewSelect={viewSelect}>
       <div className="container">
@@ -53,16 +81,33 @@ const EditNoteComponent = () => {
               </div>
             ))}
           </div>
-          <textarea
-            className="edit-field noscrollbar"
-            placeholder="input your markdown here..."
-            cols="30"
-            rows="20"
-          ></textarea>
+          {viewSelect === 'original' ? (
+            <textarea
+              className="edit-field noscrollbar"
+              placeholder="input your markdown here..."
+              cols="30"
+              rows="20"
+              value={noteText}
+              onChange={(e) => {
+                e.preventDefault()
+                setNoteText(e.target.value)
+              }}
+            ></textarea>
+          ) : (
+            viewSelect === 'markdown' && (
+              <ReactMarkdown
+                className="edit-field noscrollbar"
+                components={components}
+                children={noteText}
+              />
+            )
+          )}
         </div>
 
         <div className="submit-btn flex-right">
-          <ButtonComponent>Submit</ButtonComponent>
+          <ButtonComponent clickFunc={() => submit(noteText)}>
+            Submit
+          </ButtonComponent>
         </div>
       </div>
     </NoteEditStyled>
@@ -91,26 +136,34 @@ const CreateListComponent = ({ setCreateModalIsOpen }) => {
   }
 
   const createAListHandler = async () => {
-    const resolveAfterCreateList = () => {
-      return new Promise((resolve) => {
-        resolve(
-          dispatch(
-            createAList({
-              type: selectedType,
-              details: {
-                name: listName,
-                url: listUrl,
-                userName: listUsername,
-                theDetail: listTheDetail,
-              },
-            })
+    if (listName && listTheDetail) {
+      const resolveAfterCreateList = () => {
+        return new Promise((resolve) => {
+          resolve(
+            dispatch(
+              createAList({
+                type: selectedType,
+                details: {
+                  name: listName,
+                  url: listUrl,
+                  userName: listUsername,
+                  theDetail: listTheDetail,
+                },
+              })
+            )
           )
-        )
-      })
+        })
+      }
+      await resolveAfterCreateList()
+      dispatch(listAllLists())
+      setCreateModalIsOpen(false)
+    } else {
+      alert('Please input name and/or detail!')
     }
-    await resolveAfterCreateList()
-    dispatch(listAllLists())
-    setCreateModalIsOpen(false)
+  }
+  const submitHandler = (noteText) => {
+    setListTheDetail(noteText)
+    setIsShowModalNote(false)
   }
   return (
     <CreateListStyled>
@@ -179,7 +232,7 @@ const CreateListComponent = ({ setCreateModalIsOpen }) => {
               transform: 'translate(-50%, -50%)',
             }}
           >
-            <EditNoteComponent />
+            <EditNoteComponent submit={submitHandler} />
           </ModalComponent>
         )}
         <div className="thedetail-container">

@@ -231,6 +231,7 @@ export const NoteEditStyled = styled.div`
       }
     }
     .active {
+      transition: none;
       background: #cbcbcb;
       font-weight: 700;
       color: black;
@@ -239,6 +240,7 @@ export const NoteEditStyled = styled.div`
   }
   .edit-field {
     width: 100%;
+    height: 485px;
     border: none;
     border-radius: 0px 26px 26px 26px;
     outline: none;
