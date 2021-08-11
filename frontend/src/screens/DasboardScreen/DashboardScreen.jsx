@@ -13,7 +13,6 @@ import {
 import { Link } from 'react-router-dom'
 import { ReactComponent as DashboardSVG } from '../../images/dashboard-side.svg'
 import { ReactComponent as SettingsSVG } from '../../images/settings-side.svg'
-import { ReactComponent as AllActivitySVG } from '../../images/all-activity-side.svg'
 import DropdownComponent from '../../components/DropdownComponent/DropdownComponent'
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent.jsx'
 import HeaderComponent from '../../components/HeaderComponent/HeaderComponent'
@@ -59,13 +58,9 @@ const DashboardScreen = () => {
               <DashboardSVG fill="black" width="22" />
               <p>Dashboard</p>
             </Link>
-            <Link to="/" className="menu-side">
+            <Link to="/setting" className="menu-side">
               <SettingsSVG fill="gray" />
               <p>Settings</p>
-            </Link>
-            <Link to="/" className="menu-side">
-              <AllActivitySVG fill="black" />
-              <p>All Activity</p>
             </Link>
           </MenuSideStyled>
           <FilterDropdownStyled>

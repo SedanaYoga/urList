@@ -17,6 +17,7 @@ export const DropdownComponentStyled = styled.div`
   min-height: 50px;
   border-radius: 17px;
   .nav-item {
+    position: relative;
     width: auto;
     display: flex;
     align-items: center;
@@ -59,14 +60,13 @@ export const DropdownComponentStyled = styled.div`
 
   .dropdown {
     position: absolute;
-    top: 335px;
+    top: 30px;
     width: 250px;
-    height: 0;
+    padding: 1rem;
+    height: auto;
     transform: translateX(15.5%);
     background-color: ${(props) => props.theme.color1};
     border-radius: 0 0 17px 17px;
-    /* padding: 1rem; */
-    padding: 0rem;
     overflow: hidden;
     transition: all 1s ease;
   }

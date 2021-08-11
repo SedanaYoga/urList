@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import ListBoxComponent from '../ListBoxComponent/ListBoxComponent'
 import { ListContainerStyled } from './ListContainerComponentStyled'
-import { capitalize } from '../../helper/usefullFunc'
+import { capitalize, sortByKey } from '../../helper/usefullFunc'
 const ListContainerComponent = () => {
   const listAll = useSelector((state) => state.listAll)
   const { lists, checkedCheckbox, searchQueryList } = listAll
@@ -35,14 +35,17 @@ const ListContainerComponent = () => {
                 </div>
               </div>
               <div className="list-container noscrollbar">
-                {search(lists)
-                  .filter((list) => list.type === column)
-                  .map(
-                    (list, index) =>
+                {sortByKey(search(lists), `updatedAt`)
+                  .filter((list) => {
+                    return list.type === column
+                  })
+                  .map((list, index) => {
+                    return (
                       list.type === column && (
                         <ListBoxComponent key={index} theList={list} />
                       )
-                  )}
+                    )
+                  })}
               </div>
             </div>
           ))

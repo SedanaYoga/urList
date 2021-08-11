@@ -51,9 +51,6 @@ const DropdownMenu = ({ hook }) => {
             </label>
           </CheckboxStyled>
         ))}
-        {/* <DropdownItem>🤝 Account</DropdownItem>
-        <DropdownItem>👏 Command</DropdownItem>
-        <DropdownItem>✍ Note</DropdownItem> */}
       </div>
     </div>
   )
@@ -62,13 +59,9 @@ const DropdownMenu = ({ hook }) => {
 const NavItem = ({ icon, children, hook }) => {
   return (
     <li className="nav-item">
-      <a
-        href="localhost:5000"
-        className="icon-button"
-        onClick={() => hook.setOpen(!hook.open)}
-      >
+      <div className="icon-button" onClick={() => hook.setOpen(!hook.open)}>
         {icon}
-      </a>
+      </div>
       <FilterIcon className="filter-icon" />
       <p>Filter</p>
       {hook.open && children}

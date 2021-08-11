@@ -27,7 +27,7 @@ const ExpandNoteComponent = ({ outputDetail, noteName }) => {
             padding: '15px',
           }}
           showLineNumbers
-          wrapLongLines
+          // wrapLongLines
           language={match[1]}
           PreTag="div"
           children={String(children).replace(/\n$/, '')}
