@@ -1,70 +1,177 @@
-# Getting Started with Create React App
+<div id="top"></div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <h3 align="center">UrList - Store, Secure, Seamlessly </h3>
+  <img src="https://lh3.googleusercontent.com/wY5xafshzpNPsOZccfl7NdTceXtk-L3bjiBEX0PxvLzjeSHF2Tm1y3UdZSFYyNwDIz_hZjYNCjx_sE0qvEd1Co6y6u59Fw2BAXzr-upPJkwwET3A5NlWPVH2i1bdpmTueseox8x-iQ=w2400" alt="logo" width="100">
+  <p align="center">
+    Secure, store, and access to accounts, commands, note, and other sensitive data.
 
-## Available Scripts
+  </p>
+</div>
 
-In the project directory, you can run:
+<!-- ABOUT THE PROJECT -->
 
-### `npm start`
+# About The Project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+urList, stands for **ur**gent **list**, is a self-project that was intended to simplify my work. As a test analyst, I had to memorize a lot of accounts, commandlines, notes from seniors, meeting, etc. So, I created this to make it easier to see/retrieve my data.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![TheUI][spa-ui]
+![CRUD][crud-list]
+![MarkdownEditor][markdown-editor]
 
-### `npm test`
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Built With
 
-### `npm run build`
+The following lists show my development stack:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Frontend Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [React](https://reactjs.org/)
+- [Styled-Components](https://styled-components.com/)
+- [React-Redux](https://react-redux.js.org/)
+- [Axios](https://axios-http.com/docs/intro)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Backend Stack
 
-### `npm run eject`
+- [ExpressJS](https://expressjs.com/)
+- [cryto-js](https://www.npmjs.com/package/crypto-js)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Database
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [Mongoose](https://mongoosejs.com/)
+- [MongoDB](mongodb.com)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Development Tools:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- [Git](https://git-scm.com/)
+- [Neovim](https://neovim.io/)
+- [Nodemon](https://www.npmjs.com/package/nodemon)
+- [Morgan](https://www.npmjs.com/package/morgan)
+- [Concurrently](https://www.npmjs.com/package/concurrently)
 
-## Learn More
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## What I've learnt?
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `Designing Lists Structure` => I learnt a lot (from mistakes) about how to create the sustainable structure because I have 3 different lists on this project, `Account` list, `Command Line` list, and `Note` list. Each has different UI and different structure. I'm not sure if this is how developer design the model but it worked in my project at least.
+- `Express JS` => This is my first time using Express JS replacing core module of http-server from nodejs. At first, I struggle a lot about middlewares and how it works, but everything seems smooth when I get used to it. Plus I used third party library here for handling asynchronous function. I also learnt about Software Development Architecture in this project since I separate frontend and backend folder so it seems tend to be a macro microservice app :D
+- `Styled Component` => I learn styled component from my udemy course and try to implement it to this project. The flow is so easy because the css is on the js file, since it basically a template literal of javascript. The integration with React State is the best.
 
-### Code Splitting
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<!-- GETTING STARTED -->
 
-### Analyzing the Bundle Size
+# Getting Started
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## The Feature
 
-### Making a Progressive Web App
+- CRUD Functionality of three lists.
+- Encrypted password when it logged to Database
+- Database is using MongoDB and store it in cloud.
+- Markdown Editor for Note Editing
+- Search box for easy finding
+- Copy-Paste on click on the Password and Command Line fields
+- Fresh UI to keep your chin up facing your work :D
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Prerequisites
 
-### Advanced Configuration
+The project is divided by `frontend` and `backend` folder but don't worry, for development phase I implemented the `concurrently` library to concat the server calling.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+If you want to edit the code, you need to have `nodejs` and `NPM`.
 
-### Deployment
+- Install all dependencies by this command if you already get node and npm installed in your system. Do it in `./` and `./frontend`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```sh
+npm install
+```
 
-### `npm run build` fails to minify
+- Setup `.env` file in the `./` and `./frontend` folder
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```sh
+#Set these parameter in ./
+MONGO_URI=<INSERT YOUR MONGO URI FOR DATABASE CONNECT>
+NODE_ENV=development
+CRYPTOJS_SECRET_PASSPHRASE=<INSERT YOUR SECRET KEY FOR CRYPTOJS>
+```
+
+```sh
+#Set these parameter in ./frontend
+REACT_APP_SECRET_PASSPHRASE=<INSERT YOUR SECRET KEY FOR CRYPTOJS>
+```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+# Usage
+
+- Set your terminal directory to `./`
+- Start the server by this command, it will run `concurrently \"npm run server\" \"npm run client\"`
+  ```sh
+  npm run dev
+  ```
+- Open `localhost:3000` in your browser
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+# Database Structure
+
+## The Mongoose Schema
+
+This project is still using only one model for the list.
+`listModel`
+
+```js
+const listSchema = new mongoose.Schema(
+  {
+    type: {
+      type: String,
+      required: true,
+    },
+    details: {
+      name: { type: String, required: true },
+      url: { type: String, required: false },
+      userName: { type: String, required: false },
+      theDetail: { type: String, required: true },
+    },
+  },
+  {
+    timestamps: true,
+  }
+)
+```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+# Space for Improvement
+
+- Authentication and Session implementation
+- App for everyone and connect user data using Firebase
+- Group feature and allow them to have realtime chatting
+- Frequently used section feature
+- Reordering list on the same list section
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- LICENSE -->
+
+## License
+
+Distributed under the MIT License.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- CONTACT -->
+
+## Contact
+
+Sedana Yoga - [@cok_yoga](https://twitter.com/Cok_Yoga)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[spa-ui]: docs/spa-ui.png
+[crud-list]: docs/crud-list.png
+[markdown-editor]: docs/markdown-editor.png
