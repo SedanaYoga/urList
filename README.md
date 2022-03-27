@@ -103,6 +103,7 @@ REACT_APP_SECRET_PASSPHRASE=<INSERT YOUR SECRET KEY FOR CRYPTOJS>
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
 # Usage
 
 - Set your terminal directory to `./`
